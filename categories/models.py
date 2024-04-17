@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 NULLABLE = {'blank': True, 'null': True}
@@ -13,6 +14,7 @@ class Product(models.Model):
     price_per_purchase = models.IntegerField()  # Цена за покупку
     date_of_creation = models.DateTimeField(auto_now_add=True)  # Дата создания (записи в БД)
     date_of_last_change = models.DateTimeField(auto_now=True)  # Дата последнего изменения (записи в БД)
+    manufactured_at = models.DateField(default=datetime.now().strftime('%Y-%m-%d'))  # Дата производства продукта
 
     def __str__(self):
         return self.name
