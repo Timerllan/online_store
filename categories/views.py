@@ -1,14 +1,10 @@
 from django.core.handlers.wsgi import WSGIRequest
 from django.shortcuts import render
-
+from .models import category, product
 
 # Create your views here.
 
-def index(request):
-    return render(request, "catalog/index.html")
 
-
-def contact(request: WSGIRequest):
-    if request.POST:
-        print(request.POST)
-    return render(request, "catalog/contacts.html")
+def main(request):
+    all_product = {"product": product}
+    return render(request, "catalog/base.html", all_product)
