@@ -8,6 +8,8 @@ from .views import product_store, main_store
 app_name = CategoriesConfig.name
 
 urlpatterns = [
-    path("product_store", product_store, name="product_store"),#name - именнование функции
+    path(
+        "product_store", product_store, name="product_store"
+    ),  # name - именнование функции
     path("", main_store, name="main_store"),
 ]
