@@ -27,7 +27,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
-
+# для добавления названия приложения-регистрация
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -71,6 +71,7 @@ WSGI_APPLICATION = "online_store.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# подключение к бд
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -102,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "ru-ru"
+LANGUAGE_CODE = "ru-ru"  # язык админки
 
 TIME_ZONE = "UTC"
 
@@ -113,13 +114,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
-STATICFILES_DIRS = (BASE_DIR / "static",)
+STATIC_URL = "static/"  # установка путей к (CSS, JavaScript) в приложении
+STATICFILES_DIRS = (
+    BASE_DIR / "static",
+)  # будет искать статические файлы в директории "static" внутри корневой директории проекта.
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"  # путь, по которому будут доступны медиафайлы, изображения
+MEDIA_ROOT = (
+    BASE_DIR / "media"
+)  # это директория "media" внутри корневой директории проекта

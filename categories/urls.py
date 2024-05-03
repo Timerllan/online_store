@@ -1,9 +1,13 @@
 from django.urls import path
+from categories.apps import CategoriesConfig  # этот иморт нужен для формирования
 
-from .views import main
+# {%url 'имя_приложения: main_store'%} и.т.д
+# оно формирует ключ чтоб переходить по значениям то есть по названию функции
+from .views import product_store, main_store
 
-app_name = "students_list"
+app_name = CategoriesConfig.name
 
 urlpatterns = [
-    path("", main, name="main"),
+    path("product_store", product_store, name="product_store"),
+    path("", main_store, name="main_store"),
 ]

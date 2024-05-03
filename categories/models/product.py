@@ -2,9 +2,13 @@ from django.db import models
 
 
 # Create your models here.
-NULLABLE = {"blank": True, "null": True}
+NULLABLE = {"blank": True, "null": True}  # делает не обязательным
+# заполнения поля
+# если не заполнить
+# то оно является обязательным для заполнения
 
 
+# формирует в бд таблицы
 class Product(models.Model):
     name = models.CharField(max_length=100)  # Наименование
     description = models.TextField()  # Описание
@@ -12,7 +16,11 @@ class Product(models.Model):
         upload_to="image_product/", name="image_product", **NULLABLE
     )  # Изображение
 
-    category = models.ForeignKey("Category", on_delete=models.CASCADE)  # Категория
+    category = models.ForeignKey(
+        "Category", on_delete=models.CASCADE
+    )  # Категория здесь идёт связь
+    # таблиц
+    # Продуктов и категории
     price_per_purchase = models.IntegerField()  # Цена за покупку
     date_of_creation = models.DateTimeField(
         auto_now_add=True

@@ -4,6 +4,7 @@ import json
 import datetime
 
 
+# данная команда создана для создания фикстуры
 class Command(BaseCommand):
 
     # Здесь мы получаем данные из фикстурв с категориями
