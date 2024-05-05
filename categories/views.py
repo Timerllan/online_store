@@ -1,7 +1,7 @@
 from django.core.handlers.wsgi import WSGIRequest
 from django.shortcuts import render
 from categories.models.product import Product
-from django.http import HttpResponse
+
 
 # Create your views here.
 
@@ -13,5 +13,8 @@ def product_store(request):
 
 
 def main_store(request):
-    b = {"s": "user"}
-    return render(request, "catalog/main_store.html", b)
+    return render(request, "catalog/main_store.html")
+
+
+def contact_card(request):
+    return render(request, "catalog/con_contact_card.html")
