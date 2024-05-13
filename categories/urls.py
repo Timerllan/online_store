@@ -3,7 +3,7 @@ from categories.apps import CategoriesConfig  # этот иморт нужен �
 
 # {%url 'имя_приложения: имя функции'%} и.т.д
 # оно формирует ключ чтоб переходить по значениям то есть по названию функции
-from .views import product_store, main_store, contact_card, product_detail
+from .views import product_store, contact_card, product_detail
 
 app_name = CategoriesConfig.name
 

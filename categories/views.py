@@ -17,9 +17,5 @@ def product_detail(request, id):
     return render(request, "catalog/product_detail.html", context)
 
 
-def main_store(request):
-    return render(request, "catalog/main_store.html")
-
-
 def contact_card(request):
     return render(request, "catalog/con_contact_card.html")
