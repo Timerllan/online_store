@@ -9,9 +9,8 @@ app_name = CategoriesConfig.name
 
 urlpatterns = [
     path(
-        "product_store", product_store, name="product_store"
+        "", product_store, name="product_store"
     ),  # name - именнование функции для вызова в
-    path("", main_store, name="main_store"),
     path("contact", contact_card, name="contact_card"),
     path(
         "product_store/product_detail/<int:id>/",
