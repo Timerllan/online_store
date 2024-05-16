@@ -28,7 +28,7 @@ class Product(models.Model):
     date_of_last_change = models.DateTimeField(
         auto_now=True
     )  # Дата последнего изменения (записи в БД)
-    manufactured_at = models.DateField()  # Дата производства продукта
+    # manufactured_at = models.DateField()  # Дата производства продукта
 
     def __str__(self):
         return self.name
