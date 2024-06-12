@@ -1,4 +1,5 @@
 from django import template
+from django.templatetags.static import static
 
 register = template.Library()
 
@@ -6,5 +7,5 @@ register = template.Library()
 @register.filter()
 def media_filter(path):
     if path:
-        return f"/media/{path}"
-    return "#"
+        return path.url
+    return static("zaglushka.jpg")

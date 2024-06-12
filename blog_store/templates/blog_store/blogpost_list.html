@@ -1,0 +1,19 @@
+{% extends 'categories/base.html' %}
+{%load tags_template%}
+{% block content %}
+  <h1>Список блог-постов</h1>
+  <div class="row">
+    {% for post in object_list %}
+      <div class="col-md-6">
+        <div class="card">
+          <h2>{{ post.title }}</h2>
+            <img src="{{ post.preview|media_filter }}" class="card-image">
+          <p>{{ post.content }}</p>
+
+          <p>{{ post.created_at|date:"d.m.Y" }}</p>
+        <a href="{% url 'blog_store:blogpost_detail' post.slug %}" class="btn btn-primary">Перейти</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
