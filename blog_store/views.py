@@ -1,6 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView
+from django.views.generic import (
+    CreateView,
+    ListView,
+    DetailView,
+    UpdateView,
+    DeleteView,
+)
 from blog_store.models import BlogPost
 
 
@@ -22,7 +28,7 @@ class BlogDetailView(DetailView):
     model = BlogPost
 
     def __init__(self, **kwargs):
-        super().__init__(kwargs)
+        super().__init__(**kwargs)
         self.object = None
 
     def get_object(self, queryset=None):
@@ -30,3 +36,30 @@ class BlogDetailView(DetailView):
         self.object.views_count += 1
         self.object.save()
         return self.object
+
+
+class BlogUpdateView(UpdateView):
+    model = BlogPost
+    fields = [
+        "title",
+        "content",
+        "preview",
+    ]
+    success_url = reverse_lazy("blog_store:blogpost_list")
+
+
+class BlogDeleteView(DeleteView):
+    model = BlogPost
+    success_url = reverse_lazy("blog_store:blogpost_list")
+
+
+def activity(request, slug):
+    blogpost = get_object_or_404(BlogPost, slug=slug)
+    if blogpost.is_published:
+        blogpost.is_published = False
+    else:
+        blogpost.is_published = True
+
+    blogpost.save()
+
+    return redirect(reverse_lazy("blog_store:blogpost_list"))

@@ -1,0 +1,13 @@
+Копировать
+{% extends 'categories/base.html' %}
+{% load tags_template %}
+
+{% block content %}
+  <h1>Удаление блог-поста</h1>
+  <p>Вы действительно хотите удалить этот блог-пост?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Да, удалить</button>
+    <a href="{% url 'blog_store:blogpost_list' %}" class="btn btn-secondary">Отмена</a>
+  </form>
+{% endblock %}

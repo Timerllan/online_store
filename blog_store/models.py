@@ -16,7 +16,7 @@ class BlogPost(models.Model):
         upload_to="image_blog", verbose_name="Изображение", **NULLABLE
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="дата создания")
-    is_published = models.BooleanField(default=False, verbose_name="Активно")
+    is_published = models.BooleanField(default=True, verbose_name="Активно")
     views_count = models.PositiveIntegerField(
         default=0, verbose_name="Коллличество просмотров"
     )
