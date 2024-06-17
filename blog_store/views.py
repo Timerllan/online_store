@@ -47,14 +47,19 @@ class BlogUpdateView(UpdateView):
     ]
     success_url = reverse_lazy("blog_store:blogpost_list")
 
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get("pk")
+        slug = self.kwargs.get("slug")
+        return get_object_or_404(self.model, pk=pk, slug=slug)
+
 
 class BlogDeleteView(DeleteView):
     model = BlogPost
     success_url = reverse_lazy("blog_store:blogpost_list")
 
 
-def activity(request, slug):
-    blogpost = get_object_or_404(BlogPost, slug=slug)
+def activity(request, pk, slug):
+    blogpost = get_object_or_404(BlogPost, pk=pk, slug=slug)
     if blogpost.is_published:
         blogpost.is_published = False
     else:
