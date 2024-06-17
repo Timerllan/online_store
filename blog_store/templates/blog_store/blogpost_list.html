@@ -1,0 +1,28 @@
+{% extends 'categories/base.html' %}
+{% load tags_template %}
+
+{% block content %}
+  <h1>Список блог-постов</h1>
+  <div class="row">
+    {% for post in object_list %}
+      <div class="col-md-6">
+        <div class="card">
+          <h2>{{ post.title }}</h2>
+          <img src="{{ post.preview|media_filter }}" class="card-image">
+          <p>{{ post.content }}</p>
+          <p>{{ post.created_at|date:"d.m.Y" }}</p>
+          <div class="d-flex justify-content-between">
+            <a href="{% url 'blog_store:blogpost_detail' post.pk post.slug%}" class="btn btn-primary">Перейти</a>
+            <a href="{% url 'blog_store:blogpost_form' post.pk post.slug %}" class="btn btn-success">Редактировать</a>
+            {% if post.is_published %}
+              <a href="{% url 'blog_store:blogpost_activity' pk=post.pk slug=post.slug %}" class="btn btn-warning">Деактивировать</a>
+            {% else %}
+              <a href="{% url 'blog_store:blogpost_activity' post.pk post.slug %}" class="btn btn-secondary">Активировать</a>
+            {% endif %}
+            <a href="{% url 'blog_store:blogpost_delete' post.pk post.slug %}" class="btn btn-danger">Удалить</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

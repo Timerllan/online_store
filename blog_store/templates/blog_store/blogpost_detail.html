@@ -1,0 +1,12 @@
+{%extends 'categories/base.html'%}
+{%block content%}
+{%load tags_template%}
+
+<h1>{{ object.title }}</h1>
+<img src="{{ object.preview|media_filter }}" class="card-image">
+<p>{{ object.content }}</p>
+<p>Статус: {{ object.is_published }}</p>
+<p>Кол-во просмотров: {{ object.views_count }}</p>
+<p>Дата создания: {{object.created_at }}</p>
+
+{%endblock%}
