@@ -18,10 +18,18 @@ class BlogCreateView(CreateView):
         "preview",
     ]
     success_url = reverse_lazy("blog_store:blogpost_list")
+    # form_valid()
+    # обработка валидации формы, используется в контроллерах
+    # form_valid()обработка валидации формы, используется в контроллерах
+    # form_invalid()обработка невалидной формы, используется в контроллерах
+    # CreateView и UpdateView
 
 
 class BlogListView(ListView):
     model = BlogPost
+    # get_paginate_by()
+    # получение количества записей для постраничного вывода,
+    # используется только в контроллере ListView.
 
 
 class BlogDetailView(DetailView):
@@ -37,6 +45,10 @@ class BlogDetailView(DetailView):
         self.object.save()
         return self.object
 
+    # get_queryset()получение запроса для формирования данных, используется в каждом контроллере.
+    # get_context_data()получение контекста для формирования ответа,
+    # который будет рендериться из шаблона, используется в каждом контроллере
+
 
 class BlogUpdateView(UpdateView):
     model = BlogPost
@@ -47,15 +59,30 @@ class BlogUpdateView(UpdateView):
     ]
     success_url = reverse_lazy("blog_store:blogpost_list")
 
-    def get_object(self, queryset=None):
+    # form_valid()
+    # обработка валидации формы, используется в контроллерах
+    # form_valid()обработка валидации формы, используется в контроллерах
+    # form_invalid()обработка невалидной формы, используется в контроллерах
+    # CreateView и UpdateView
+
+    def get_object(self, queryset=None):  # получение запроса для формирования данных,
+        # используется в каждом контроллере.
         pk = self.kwargs.get("pk")
         slug = self.kwargs.get("slug")
         return get_object_or_404(self.model, pk=pk, slug=slug)
+
+    # get_queryset()получение запроса для формирования данных, используется в каждом контроллере.
+    # get_context_data()получение контекста для формирования ответа,
+    # который будет рендериться из шаблона, используется в каждом контроллере
 
 
 class BlogDeleteView(DeleteView):
     model = BlogPost
     success_url = reverse_lazy("blog_store:blogpost_list")
+
+    # get_queryset()получение запроса для формирования данных, используется в каждом контроллере.
+    # get_context_data()получение контекста для формирования ответа,
+    # который будет рендериться из шаблона, используется в каждом контроллере
 
 
 def activity(request, pk, slug):

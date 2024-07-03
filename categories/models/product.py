@@ -10,18 +10,23 @@ NULLABLE = {"blank": True, "null": True}  # делает не обязатель
 
 # формирует в бд таблицы
 class Product(models.Model):
-    name = models.CharField(max_length=100)  # Наименование
-    description = models.TextField()  # Описание
+    name = models.CharField(max_length=100, verbose_name="Цена")  # Наименование
+    description = models.TextField(verbose_name="Описание")  # Описание
     image = models.ImageField(
-        upload_to="image_product/", name="image_product", **NULLABLE
+        verbose_name="Изображение товара",
+        upload_to="image_product/",
+        name="image_product",
+        **NULLABLE
     )  # Изображение
 
     category = models.ForeignKey(
-        "Category", on_delete=models.CASCADE
+        "Category", on_delete=models.CASCADE, verbose_name="Категории спорта"
     )  # Категория здесь идёт связь
     # таблиц
     # Продуктов и категории
-    price_per_purchase = models.IntegerField()  # Цена за покупку
+    price_per_purchase = models.IntegerField(
+        verbose_name="Устанока цены"
+    )  # Цена за покупку
     date_of_creation = models.DateTimeField(
         auto_now_add=True
     )  # Дата создания (записи в БД)
