@@ -1,0 +1,14 @@
+{% extends 'categories/categories_form.html'%}
+{%block content%}
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <form class="row g-3" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{%endblock%}
