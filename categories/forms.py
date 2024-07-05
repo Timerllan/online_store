@@ -8,8 +8,6 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = "__all__"
 
-
-
     def clean_name(self):  # валидация данных - проверка запрещённых слов
         name = self.cleaned_data["name"].lower()
         for forbidden_word in FORBIDDEN_WORDS:
