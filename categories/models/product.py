@@ -10,7 +10,7 @@ NULLABLE = {"blank": True, "null": True}  # делает не обязатель
 
 # формирует в бд таблицы
 class Product(models.Model):
-    name = models.CharField(max_length=100, verbose_name="Цена")  # Наименование
+    name = models.CharField(max_length=100, verbose_name="Наименование")  # Наименование
     description = models.TextField(verbose_name="Описание")  # Описание
     image = models.ImageField(
         verbose_name="Изображение товара",
