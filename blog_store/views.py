@@ -8,16 +8,13 @@ from django.views.generic import (
     DeleteView,
 )
 from blog_store.models import BlogPost
+from .forms import BlogForms
 
 
 class BlogCreateView(CreateView):
     model = BlogPost
-    fields = [
-        "title",
-        "content",
-        "preview",
-    ]
     success_url = reverse_lazy("blog_store:blogpost_list")
+    form_class = BlogForms
     # form_valid()
     # обработка валидации формы, используется в контроллерах
     # form_valid()обработка валидации формы, используется в контроллерах
@@ -52,11 +49,7 @@ class BlogDetailView(DetailView):
 
 class BlogUpdateView(UpdateView):
     model = BlogPost
-    fields = [
-        "title",
-        "content",
-        "preview",
-    ]
+    form_class = BlogForms
     success_url = reverse_lazy("blog_store:blogpost_list")
 
     # form_valid()
