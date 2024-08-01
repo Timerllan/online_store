@@ -6,8 +6,6 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from categories.forms import ProductForm, VersionForm
 from django.forms.models import inlineformset_factory
 
-# Create your views here.
-
 
 class ProductListView(ListView):
     model = Product
@@ -19,7 +17,6 @@ class ProductCreateView(CreateView):
     success_url = reverse_lazy("categories:product_store")
 
 
-#
 class ProductDetailView(DetailView):
     model = Product
 
@@ -35,7 +32,6 @@ class ProductUpdateView(UpdateView):
             Product,
             Version,
             form=VersionForm,
-            fields="__all__",
             extra=1,
             can_delete=True,
         )
@@ -48,11 +44,13 @@ class ProductUpdateView(UpdateView):
         return context
 
     def form_valid(self, form):
-        self.object = form.save()
-
+        self.object = form.save(commit=False)  # Сохраняем основной объект
         formset = self.get_context_data()["formset"]
-        if formset.is_valid():
-            formset.instance = self.object
-            formset.save()  # Сохраняем версии
 
-        return super().form_valid(form)
+        if formset.is_valid():
+            self.object.save()  # Сохраняем основной объект
+            formset.instance = self.object  # Привязываем версии к объекту
+            formset.save()  # Сохраняем версии
+            return super().form_valid(form)  # Перенаправляем после успешного сохранения
+        else:
+            return self.form_invalid(form)  # Если форма не валидна, возвращаем ошибки
