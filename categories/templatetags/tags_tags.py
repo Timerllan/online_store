@@ -8,4 +8,4 @@ register = template.Library()
 def media_filter(path):
     if path:
         return path.url
-    return static("zaglushka.jpg")
+    return static("zaglushkka.jpg")

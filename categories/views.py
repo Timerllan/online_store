@@ -9,6 +9,10 @@ from django.forms.models import inlineformset_factory
 
 class ProductListView(ListView):
     model = Product
+    context_object_name = "object_list"
+
+    def get_queryset(self):
+        return Product.objects.prefetch_related("versions").all()
 
 
 class ProductCreateView(CreateView):

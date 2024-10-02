@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "categories",
     "blog_store",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
 
 ROOT_URLCONF = "online_store.urls"
 
@@ -129,3 +131,8 @@ MEDIA_URL = "/media/"  # путь, по которому будут доступ
 MEDIA_ROOT = (
     BASE_DIR / "media"
 )  # это директория "media" внутри корневой директории проекта
+
+AUTH_USER_MODEL = "users.User"
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
