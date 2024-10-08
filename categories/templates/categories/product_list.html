@@ -5,17 +5,18 @@
     {% for prod in object_list %}
     <div class="col-md-6">
         <div class="card shadow-sm">
-            <img src="{{ prod.image | media_filter }}" class="card-image">
+            <img src="{{ prod.image_product | media_filter }}" class="card-image">
             <div class="card-body">
                 <p class="card-text">{{ prod.name }}</p>
-                <p class="card-text">{{ prod.description|truncatechars:100 }}</p>
+                <p class="card-text">{{ prod.description|truncatechars:100 }} | Автор продукта: {% if prod.author %}{{ prod.author }}{% else %}Неизвестен{% endif %}</p>
 
                 <h5>Версии продукта:</h5>
                 <ul>
                     {% for version in prod.versions.all %}
                         <li>
-                            <strong>Номер версии - {{ version.name_version }}</strong> Название версии - {{ version.number_version }}){% if version.is_current_version %} - Текущая версия{% endif %}
-                        </li>
+    <strong>Номер версии - {{ version.name_version }}</strong> Название версии - {{ version.number_version }}) -
+    {% if version.is_current_version %}Активна{% else %}Неактивна{% endif %}
+</li>
                     {% empty %}
                         <li>Нет доступных версий.</li>
                     {% endfor %}

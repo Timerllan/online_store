@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from categories.models.product import Product
 from categories.models.version import Version
@@ -15,17 +16,22 @@ class ProductListView(ListView):
         return Product.objects.prefetch_related("versions").all()
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy("categories:product_store")
+
+    def form_valid(self, form):
+        # Устанавливаем автора на текущего пользователя
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 
 class ProductDetailView(DetailView):
     model = Product
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy("categories:product_store")

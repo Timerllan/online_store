@@ -1,5 +1,5 @@
 from django.db import models
-
+from users.models import User
 
 # Create your models here.
 NULLABLE = {"blank": True, "null": True}  # делает не обязательным
@@ -34,6 +34,8 @@ class Product(models.Model):
         auto_now=True
     )  # Дата последнего изменения (записи в БД)
     # manufactured_at = models.DateField()  # Дата производства продукта
+
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, **NULLABLE)
 
     def __str__(self):
         return self.name

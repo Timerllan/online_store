@@ -1,0 +1,6 @@
+{% extends 'categories/base.html' %}
+{% block content %}
+<h1>Подтверждение электронной почты</h1>
+<p>Ваш адрес электронной почты был успешно подтвержден. Теперь вы можете войти в систему.</p>
+<a class="btn btn-primary" href="{% url 'users:login' %}">Перейти</a>
+{% endblock %}

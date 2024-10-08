@@ -1,11 +1,18 @@
 {% extends "categories/base.html" %}
 {% block content %}
     <div class="container mt-5">
-        <h2 class="text-center">Регистрация</h2>
-        <form method="post">  <!-- Добавлен тег <form> -->
-            {% csrf_token %}
-            {{ form.as_p }}  <!-- Исправлено: убраны фигурные скобки вокруг form -->
-            <button type="submit" class="btn btn-primary">Вход</button> <!-- Кнопка отправки формы -->
-        </form>
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center">Вход в систему</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Вход</button>
+                </form>
+                <div class="text-center mt-3">
+                    <a href="{%url 'users:password_reset'%}">Забыли пароль?</a><!-- Ссылка на восстановление пароля -->
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
