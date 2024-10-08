@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+from decouple import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "categories",
     "blog_store",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
 
 ROOT_URLCONF = "online_store.urls"
 
@@ -78,7 +81,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "django_online_store",
         "USER": "postgres",
-        "PASSWORD": "12345",
+        "PASSWORD": config("PASSWORD_DB"),
         "PORT": 5433,
     }
 }
@@ -129,3 +132,23 @@ MEDIA_URL = "/media/"  # путь, по которому будут доступ
 MEDIA_ROOT = (
     BASE_DIR / "media"
 )  # это директория "media" внутри корневой директории проекта
+
+"""Настройки приложения users регистрации аутентификации"""
+AUTH_USER_MODEL = "users.User"
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+LOGIN_URL = "users:login"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+"""Адрес эл.поты из которой будут отпрвлены сообщения для аутентификации подтверждение эл почты"""
+EMAIL_HOST_USER = config("POST")
+
+"""пароль приложения Двухэтапной аутентификации почты"""
+EMAIL_HOST_PASSWORD = config("APP_PASSWORD_MAIL")
+
+FRONTEND_URL = "http://localhost:8000"

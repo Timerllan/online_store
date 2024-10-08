@@ -37,9 +37,6 @@ class Command(BaseCommand):
                 date_of_last_change=datetime.datetime.strptime(
                     product["fields"]["date_of_last_change"], "%Y-%m-%dT%H:%M:%S.%fZ"
                 ),
-                manufactured_at=datetime.datetime.strptime(
-                    product["fields"]["manufactured_at"], "%Y-%m-%d"
-                ),
             )
             for product in all_object
             if product["model"] == "categories.product"

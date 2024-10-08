@@ -3,7 +3,9 @@ from django.db import models
 
 class Version(models.Model):
 
-    product = models.ForeignKey("Product", on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        "Product", on_delete=models.CASCADE, related_name="versions"
+    )
     number_version = models.CharField(max_length=100, verbose_name="номер версии")
     name_version = models.CharField(max_length=100, verbose_name="название версии")
     is_current_version = models.BooleanField(

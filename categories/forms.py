@@ -14,7 +14,13 @@ class BootstrapForm(forms.ModelForm):
 class ProductForm(BootstrapForm):
     class Meta:
         model = Product
-        fields = "__all__"
+        fields = [
+            "name",
+            "description",
+            "image_product",
+            "category",
+            "price_per_purchase",
+        ]
 
     def clean_name(self):
         name = self.cleaned_data["name"].lower()
