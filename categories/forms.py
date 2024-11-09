@@ -6,12 +6,12 @@ from categories.list_config_name.config_name import FORBIDDEN_WORDS
 
 class BootstrapForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(BootstrapForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs.update({"class": "form-control"})
 
 
-class ProductForm(BootstrapForm):
+class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = [
@@ -20,6 +20,7 @@ class ProductForm(BootstrapForm):
             "image_product",
             "category",
             "price_per_purchase",
+            "is_published",
         ]
 
     def clean_name(self):
@@ -43,3 +44,13 @@ class VersionForm(forms.ModelForm):
                 product=self.instance.product, is_current_version=True
             ).exclude(pk=self.instance.pk).update(is_current_version=False)
         return cleaned_data
+
+
+class ManagerForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = [
+            "description",
+            "category",
+            "is_published",
+        ]

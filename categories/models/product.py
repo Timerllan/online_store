@@ -12,7 +12,7 @@ NULLABLE = {"blank": True, "null": True}  # делает не обязатель
 class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name="Наименование")  # Наименование
     description = models.TextField(verbose_name="Описание")  # Описание
-    image = models.ImageField(
+    image_product = models.ImageField(
         verbose_name="Изображение товара",
         upload_to="image_product/",
         name="image_product",
@@ -36,6 +36,9 @@ class Product(models.Model):
     # manufactured_at = models.DateField()  # Дата производства продукта
 
     author = models.ForeignKey(User, on_delete=models.SET_NULL, **NULLABLE)
+    is_published = models.BooleanField(
+        default=False, verbose_name="признак публиукации"
+    )
 
     def __str__(self):
         return self.name
@@ -43,3 +46,8 @@ class Product(models.Model):
     class Meta:
         verbose_name = "товар"
         verbose_name_plural = "товары"
+        permissions = [
+            ("can_change_product_categories", "Может изменять название Категории"),
+            ("can_set_product_published", "Может изменять статус публикации"),
+            ("can_change_description", "может менять описание любого продукта"),
+        ]
