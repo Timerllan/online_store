@@ -13,25 +13,33 @@
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasLabel">Aperture</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">Кнопка</button>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <ul class="navbar-nav flex-grow-1 justify-content-between">
-                    <li class="nav-item"><a class="nav-link" href="#">
-                        <svg class="bi" width="24" height="24">
-                            <use xlink:href="#aperture"/>
-                        </svg>
-                    </a></li>
-                    <li class="nav-item"><a class="nav-link" href="{%url 'categories:product_store'%}">Главная</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{%url 'categories:product_form'%}">Создание продукта</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{%url 'blog_store:blogpost_form'%}">Добавить Блог</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{%url 'blog_store:blogpost_list'%}">Блоги</a></li>
-                    <li class="nav-item">{% if user.is_authenticated %}
-        <a class="nav-link" href="{% url 'users:logout' %}">Выход</a>
-    {% else %}
-                        <a class="nav-link" href="{% url 'users:login' %}">Вход</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'users:register'%}">Регистрация</a></li>
-                    {% endif %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Все товары
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                            <li><a class="dropdown-item" href="{% url 'categories:product_store' %}">Все продукты</a></li>
+                            {% for category in categories %}
+                                <li><a class="dropdown-item" href="{% url 'categories:product_store' %}?category={{ category.id }}">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'categories:product_form' %}">Создание продукта</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'blog_store:blogpost_form' %}">Добавить Блог</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'blog_store:blogpost_list' %}">Блоги</a></li>
+
+                    <li class="nav-item">
+                        {% if user.is_authenticated %}
+                            <a class="nav-link" href="{% url 'users:logout' %}">Выход</a>
+                        {% else %}
+                            <a class="nav-link" href="{% url 'users:login' %}">Вход</a>
+                            <a class="nav-link" href="{% url 'users:register' %}">Регистрация</a>
+                        {% endif %}
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="#">
                         <svg class="bi" width="24" height="24">
                             <use xlink:href="#cart"/>

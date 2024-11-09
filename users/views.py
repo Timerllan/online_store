@@ -55,3 +55,4 @@ def password_reset_view(request):
             messages.error(request, "Пользователь с таким адресом электронной почты не найден.")
 
     return render(request, 'users/password_reset.html')
+
