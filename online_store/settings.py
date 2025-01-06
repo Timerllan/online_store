@@ -72,6 +72,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "online_store.wsgi.application"
 
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -83,6 +84,14 @@ DATABASES = {
         "USER": "postgres",
         "PASSWORD": config("PASSWORD_DB"),
         "PORT": 5433,
+    }
+}
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
     }
 }
 
