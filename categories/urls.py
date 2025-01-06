@@ -1,4 +1,6 @@
 from django.urls import path
+from django.views.decorators.cache import cache_page
+
 from categories.apps import CategoriesConfig  # Импорт для формирования ключа
 
 from .views import (
@@ -17,9 +19,9 @@ urlpatterns = [
     ),  # Форма создания продукта
     path(
         "product_store/product_detail/<int:pk>/",
-        ProductDetailView.as_view(),
+        cache_page(60)(ProductDetailView.as_view()),
         name="product_detail",
-    ),  # Детали продукта
+    ),
     path(
         "product_store/product_update/<int:pk>/",
         ProductUpdateView.as_view(),
