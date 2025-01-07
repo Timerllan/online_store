@@ -10,7 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-from decouple import config
+import os
+from dotenv import load_dotenv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -82,8 +83,8 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "django_online_store",
         "USER": "postgres",
-        "PASSWORD": config("PASSWORD_DB"),
-        "PORT": 5433,
+        "PASSWORD": os.getenv("PASSWORD_DB"),
+        "PORT": os.getenv("DB_PORT"),
     }
 }
 
@@ -155,9 +156,9 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 """Адрес эл.поты из которой будут отпрвлены сообщения для аутентификации подтверждение эл почты"""
-EMAIL_HOST_USER = config("POST")
+EMAIL_HOST_USER = os.getenv("POST_MAIL")
 
 """пароль приложения Двухэтапной аутентификации почты"""
-EMAIL_HOST_PASSWORD = config("APP_PASSWORD_MAIL")
+EMAIL_HOST_PASSWORD = os.getenv("APP_PASSWORD_MAIL")
 
 FRONTEND_URL = "http://localhost:8000"
